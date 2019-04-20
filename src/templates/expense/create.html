@@ -1,0 +1,33 @@
+<!--
+This HTML form is used for adding new expense
+-->
+<html>
+<head>
+	<style>
+body{
+	background-color: #666;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+.dropbtn {
+  background-color:#3b87ba;
+  color: white;
+  padding: 16px;
+  font-size: 14px;
+  border: none;
+
+}
+	</style>
+	</head>
+	<body>
+<form method='POST'>{% csrf_token %}
+
+{{form.as_p}}
+
+<input class="dropbtn" type='submit' value='save' />
+</form>
+<br>
+<br>
+<br><br>
+<center><a href="http://127.0.0.1:8000/"><button class="dropbtn">Home</button></a></center>
+</body>
+</html>

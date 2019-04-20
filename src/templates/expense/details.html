@@ -1,0 +1,181 @@
+<!--
+this HTML page is used for displaying ALL Expenses
+it is also used for displaying Filtered, sorted content.
+-->
+<html>
+<head>
+<style>
+.dropbtn {
+  background-color:#3b87ba;
+  color: white;
+  padding: 8px;
+  font-size: 14px;
+  border: none;
+
+}
+a{
+text-decoration:none;
+color:white;
+}
+.cls{
+	color:black;
+}
+.body{
+
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 26%;
+ 
+  background: #ccc;
+  padding: 20px;
+}
+
+
+
+
+article {
+  float: right;
+  padding: 20px;
+  width: 67%;
+  background-color: #f1f1f1;
+  
+}
+
+#expense {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#expense td, #expense th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#expense tr:nth-child(even){background-color: #f2f2f2;}
+
+#expense tr:hover {background-color: #ddd;}
+
+#expense th {
+  
+  text-align: left;
+  background-color: #3b87ba;
+  color: white;
+}
+</style>
+</head>
+<body class="body">
+	<a href="http://127.0.0.1:8000/home/">Home</a>
+	<header>
+		<a href="http://127.0.0.1:8000/showexpense/">
+  <h2>Expenses</h2></a>
+</header>
+<nav><br>
+  <!--
+   a hovering drop down button. on hovering, it gives three options on which sorting can be performed.
+   options includes based on date, ammount, title
+  -->
+<div class="dropdown">
+  <button class="dropbtn">Sort By</button>
+  <div class="dropdown-content">
+    <a href="http://127.0.0.1:8000/expense_orderby_title/">By title</a>
+    <a href="http://127.0.0.1:8000/expense_orderby_date/">By Date</a>
+    <a href="http://127.0.0.1:8000/expense_orderby_ammount/">By Ammount</a>
+  </div>
+
+</div>
+<div style="height:100%; width:50%ackground:#000000">
+<h2>Filters</h2>
+<form action='http://127.0.0.1:8000/filter_view_title/' method='GET' >
+	<h3>Filter by Title</h3><input type="text" name='title' placeholder="Enter title.." /> <input  class="dropbtn" type='submit' value='Filter' />
+
+</form>
+
+
+<form action='http://127.0.0.1:8000/filter_view_ammount/' method='GET'>
+	<h3>Filter by ammount</h3><br>Lower Limit <input type="text" name='start' placeholder="Starting..." /> <br>Upper Limit <input type="text" name='end' placeholder="Ending..." />  <input class="dropbtn" type='submit' value='Filter' />
+
+</form>
+<br>
+<!--
+displaying total sum of all expenses
+-->
+<h2>Total Expense:{{sum.ammount__sum}}</h2>
+</nav>
+<article>
+
+	<!--
+displaying all expenses
+-->
+<table id="expense">
+	<tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Date</th>
+    <th>Ammount</th>
+    <th>Actions</th>
+  </tr>
+
+
+  {% for item in obje%}
+  {{sum|add:item.ammount}}
+  <tr>
+<td>{{item.title}}</td> 
+
+<td> {{item.description}}</td>
+<td>{{item.date}}</td>
+<td> {{item.ammount}} </td>
+
+<td><a href='http://127.0.0.1:8000/deleteexpense/{{item.id}}'><button class="dropbtn">delete</button></a>   <a href='http://127.0.0.1:8000/updateexpense/{{item.id}}'><button class="dropbtn">update</button></a></td>
+</tr>
+{% endfor %}
+
+</table>
+
+
+
+</article>
+
+
+</body>
+
+</html>

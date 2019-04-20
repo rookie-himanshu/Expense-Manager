@@ -1,0 +1,65 @@
+<!--
+This is used for updating existing Expense
+Initially, all fields containg old value. after submitting the form, new values will be updated
+-->
+
+<html>
+<head>
+<style>
+	.dropbtn {
+  background-color:#3b87ba;
+  color: white;
+  padding: 16px;
+  font-size: 35px;
+  border: none;
+
+}
+a{
+text-decoration:none;
+color:white;
+}
+.body{
+
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+header {
+	height: 100%;
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+input[type=text], select {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+body{
+
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+</style>
+
+	</head>
+
+
+<body>
+<header>
+<center><br><br><br><form action='http://127.0.0.1:8000/update_view/' method='GET'>
+Id: <input type='text' name ='id' value='{{obje.id}}'/><br><br>
+Title: <input type='text' name ='title' value='{{obje.title}}'/><br><br>
+Description: <input type='text' name='description' value='{{obje.description}}'/><br><br>
+Ammount: <input type='text' name='ammount'value='{{obje.ammount}}'/><br><br>
+<input class="dropbtn" type='submit' value='update' />
+</form></center>
+</header>
+</body>
+</html>
